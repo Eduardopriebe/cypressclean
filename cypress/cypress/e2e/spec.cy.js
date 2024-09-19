@@ -1,14 +1,14 @@
-describe('Page Navigation Test', () => {
-  
-  it('should navigate to settings', () => {
+// cypress/integration/login.spec.js
+import { loginPage } from '../page_objects/loginPage';
 
-    const varUrl = 'https://coderbyte.com/profile';
-
-    cy.visit(varUrl);
-
-    cy.contains('settings').click();
-
-    cy.url().should('include', '/settings');
-
+describe('Login Test', () => {
+  it('Access to google page', () => {
+    loginPage.visit();
+    loginPage.fillUsername('user123');
+    loginPage.fillPassword('password123');
+    loginPage.submit();
+    
+    // Verificar se o login foi bem-sucedido
+    cy.url().should('include', '/dashboard');
   });
 });
