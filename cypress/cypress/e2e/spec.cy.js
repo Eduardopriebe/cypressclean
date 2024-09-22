@@ -9,7 +9,7 @@ describe('Usuario realizar loin', () => {
   
   before(() => {
     //Given
-    cy.fixture("example").then((tData) => {
+    cy.fixture("dados").then((tData) => {
      data = tData;
     // cy.log(data.username)
     // cy.log(data.password)  

@@ -1,4 +1,5 @@
 // cypress/integration/login.spec.js
+import { newUser } from "../page_objects/newUser";
 import {faker} from '@faker-js/faker';
 
 
@@ -8,7 +9,7 @@ describe('Usuário Novo', () => {
   
   before(() => {
     //Given
-    cy.fixture("example").then((tData) => {
+    cy.fixture("dados").then((tData) => {
      data = tData;
     // cy.log(data.username)
     // cy.log(data.password)  
@@ -23,6 +24,7 @@ describe('Usuário Novo', () => {
     cy.new_user(faker.name.fullName(), faker.internet.email(), password, data.roleAdm )
 
     //Then
+    newUser.sucessMsg().should('be.visible');
    
   });
 });
