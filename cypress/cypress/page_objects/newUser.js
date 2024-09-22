@@ -1,9 +1,6 @@
 // cypress/page-objects/loginPage.js
 class NewUser {
-    page(){
-      cy.visit('https://curso-automacao-web-app.herokuapp.com/users-list'); //url pagina
-    }
-    
+        
     btnNewUser() {
       return cy.get('#button-forms-customer-create > .icon > .bi');
     }
