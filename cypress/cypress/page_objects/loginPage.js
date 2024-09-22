@@ -1,19 +1,24 @@
 // cypress/page-objects/loginPage.js
 class LoginPage {
     visit() {
-      cy.visit('www.google.com.br');  // URL de login
+      cy.visit('https://curso-automacao-web-app.herokuapp.com/login');  // URL de login
     }
     
     fillUsername(username) {
-      cy.get('input[name="username"]').type(username);
+      return cy.get('#yourUsername');
     }
   
     fillPassword(password) {
-      cy.get('input[name="password"]').type(password);
+      return cy.get('#yourPassword');
     }
   
     submit() {
-      cy.get('button[type="submit"]').click();
+      return cy.get('#logginButton').click();
+    }
+
+    sucess() {
+
+      return cy.get('h1');
     }
   }
   
