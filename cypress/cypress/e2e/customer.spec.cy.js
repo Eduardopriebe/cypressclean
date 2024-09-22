@@ -19,6 +19,7 @@ describe('Cliente Novo', () => {
   
   it('Criando Customer com sucesso', () => {
 
+    //When
     cy.login(data.username, data.password);
     cy.new_customer(faker.name.fullName(12),
                     faker.internet.email(),
@@ -31,7 +32,8 @@ describe('Cliente Novo', () => {
                     faker.address.zipCode(),
                     faker.phone.number(),
                   )
-                  
+   
+   //Then               
    newCustomer.sucessMsg().should('be.visible');
   });
 });
