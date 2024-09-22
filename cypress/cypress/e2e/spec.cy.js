@@ -1,14 +1,29 @@
 // cypress/integration/login.spec.js
 import { loginPage } from '../page_objects/loginPage';
+import { dashboard, Dashboard } from '../page_objects/Dashboard';
 
-describe('Login Test', () => {
-  it('Access to google page', () => {
-    loginPage.visit();
-    // loginPage.fillUsername('user123');
-    // loginPage.fillPassword('password123');
-    // loginPage.submit();
+
+describe('Usuario realizar loin', () => {
+  
+  let data;
+  
+  before(() => {
+    //Given
+    cy.fixture("example").then((tData) => {
+     data = tData;
+    // cy.log(data.username)
+    // cy.log(data.password)  
+    });
+  });
+  
+  it('Acessar a página com Usuário e senha válidos', () => {
     
-    // // Verificar se o login foi bem-sucedido
-    // cy.url().should('include', '/dashboard');
+    //When
+    cy.login(data.username, data.password);
+
+    //Then
+   dashboard.header().should('be.visible');
+   dashboard.user().should('be.visible');
+
   });
 });
