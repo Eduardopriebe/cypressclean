@@ -21,7 +21,10 @@ describe('Usuário Novo', () => {
 
     //When
     cy.login(data.username, data.password);
-    cy.new_user(faker.name.fullName(), faker.internet.email(), password, data.roleAdm )
+    cy.new_user(faker.name.fullName(), 
+                faker.internet.email(), 
+                password, 
+                data.roleAdm)
 
     //Then
     newUser.sucessMsg().should('be.visible');
