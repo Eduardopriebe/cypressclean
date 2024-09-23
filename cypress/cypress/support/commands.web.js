@@ -24,9 +24,9 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
-import { loginPage } from "../page_objects/loginPage";
-import { newUser } from "../page_objects/newUser";
-import { newCustomer } from "../page_objects/customers";
+import { loginPage } from "../page_objects/loginPage.js";
+import { newUser } from "../page_objects/newUser.js";
+import { newCustomer } from "../page_objects/customers.js";
 import urls from './urls.js'
 require('cypress-xpath')
 
@@ -40,8 +40,10 @@ Cypress.Commands.add('login', (username, password) => {
   });
 
 Cypress.Commands.add('new_user', (name,username,password,roles) => {
-    cy.visit(urls.user);
-    newUser.btnNewUser().click();
+    
+    setAuthCookies();
+    cy.visit(urls.user, { onBeforeLoad(win) {setAuthSessionStorage(win)}})
+    //newUser.btnNewUser().click();
     newUser.name().click({force: true}).type(name);
     newUser.userName().type(username);
     newUser.password().type(password);
@@ -54,11 +56,26 @@ Cypress.Commands.add('new_user', (name,username,password,roles) => {
 
 })
 
-Cypress.Commands.add('new_customer', (name,email,company,salary,city,state,adress,country,zipcode,phonenumber) => {
-  cy.visit(urls.customer);
+function setAuthCookies(){
+
+    cy.setCookie("user.id", String(Cypress.env("auth.user.id")))
+    cy.setCookie("token", Cypress.env("auth.token").replace(" ", "%20"))
+    cy.request(urls.auth)
+}
+
+function setAuthSessionStorage(win){
+
+    win.sessionStorage.setItem("user.id", Cypress.env("auth.user.id"))
+    win.sessionStorage.setItem("token", Cypress.env("auth.token"))
   
-  //newCustomer.btnNewCustomer().click();
-  newCustomer.name().type(name);
+
+}
+
+Cypress.Commands.add('new_customer', (name,email,company,salary,city,state,adress,country,zipcode,phonenumber) => {
+  
+  setAuthCookies();
+  cy.visit(urls.customer, { onBeforeLoad(win) {setAuthSessionStorage(win)}})
+  newCustomer.name().click({force: true}).type(name);
   newCustomer.email().click({force: true}).type(email);
   newCustomer.company().click({force: true}).type(company);
   newCustomer.salary().click({force: true}).type(salary);

@@ -14,6 +14,7 @@
     "cypress": "^13.14.2"
   },
   "dependencies": {
+    "cypress-plugin-api": "^2.11.2",
     "cypress-xpath": "^2.0.1"
   }
 }

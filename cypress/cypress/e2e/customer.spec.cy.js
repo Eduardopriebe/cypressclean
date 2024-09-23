@@ -2,25 +2,19 @@
 import { newCustomer } from "../page_objects/customers";
 
 import {faker} from '@faker-js/faker';
+import { user } from "../support/urls";
 
 
 describe('Cliente Novo', () => {
-  
-  let data;
-  
+    
   before(() => {
     //Given
-    cy.fixture("dados").then((tData) => {
-     data = tData;
-    // cy.log(data.username)
-    // cy.log(data.password)  
-    });
+    cy.auth_bypass_api();
   });
   
   it('Criando Customer com sucesso', () => {
 
     //When
-    cy.login(data.username, data.password);
     cy.new_customer(faker.name.fullName(12),
                     faker.internet.email(),
                     faker.company.name(),
