@@ -88,8 +88,6 @@ Cypress.Commands.add('new_customer', (name,email,company,salary,city,state,adres
 
   newCustomer.submit().click({force: true});
 
-  
-
 })
 Cypress.Commands.add('user_Success', (msg) => {
   // //When
@@ -101,4 +99,11 @@ Cypress.Commands.add('customer_Success', (msg) => {
   // //When
   //newUser.sucessMsg().should('be.visible');
   newCustomer.sucessMsg().should(msg);
+})
+
+Cypress.Commands.add('list_customers', () =>{
+
+  setAuthCookies();
+  cy.visit(urls.customer_list, { onBeforeLoad(win) {setAuthSessionStorage(win)}})
+  newCustomer.sucessMsg().should('be.visible');
 })

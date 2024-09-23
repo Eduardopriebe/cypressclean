@@ -1,5 +1,5 @@
 // cypress/integration/login.spec.js
-import { newUser } from "../page_objects/newUser";
+import { newUser } from "../../page_objects/newUser";
 import {faker} from '@faker-js/faker';
 
 
