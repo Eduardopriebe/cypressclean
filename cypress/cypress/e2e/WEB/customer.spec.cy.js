@@ -1,8 +1,8 @@
 // cypress/integration/login.spec.js
-import { newCustomer } from "../page_objects/customers";
+import { newCustomer } from "../../page_objects/customers";
 
 import {faker} from '@faker-js/faker';
-import { user } from "../support/urls";
+import { user } from "../../support/urls";
 
 
 describe('Cliente Novo', () => {

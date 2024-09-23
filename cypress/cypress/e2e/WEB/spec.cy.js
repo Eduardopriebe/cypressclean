@@ -1,6 +1,6 @@
 // cypress/integration/login.spec.js
-import { loginPage } from '../page_objects/loginPage';
-import { dashboard, Dashboard } from '../page_objects/Dashboard';
+import { loginPage } from '../../page_objects/loginPage';
+import { dashboard, Dashboard } from '../../page_objects/Dashboard';
 
 
 describe('Usuario realizar loin', () => {
