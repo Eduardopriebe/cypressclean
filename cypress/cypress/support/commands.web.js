@@ -36,6 +36,10 @@ Cypress.Commands.add('login', (username, password) => {
     loginPage.fillUsername().type(username);
     loginPage.fillPassword().type(password);
     loginPage.submit();
+    cy.wait('@authRequest').then((response) =>{
+      expect(response.statusCode).to.eq(200)
+      expect(response.body.token).to.exist
+    })
     loginPage.sucess().contains('Dashboard');
   });
 
