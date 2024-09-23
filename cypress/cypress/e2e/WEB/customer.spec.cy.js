@@ -5,6 +5,23 @@ import {faker} from '@faker-js/faker';
 import { user } from "../../support/urls";
 
 
+describe('Usuários devem visualizar a lista de clientes', () =>{
+  
+  before(() =>{
+  cy.auth_bypass_api();
+});
+  
+beforeEach(() =>{
+  cy.intercept('**/api/v1/customers/all', {fixture: 'customer.json'})
+})
+
+it('através do form da aplicação com sucesso', () =>{
+    cy.list_customers();
+  })
+
+
+})
+
 describe('Cliente Novo', () => {
     
   before(() => {
