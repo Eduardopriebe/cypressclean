@@ -5,5 +5,12 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
       // implement node event listeners here
     },
+    env: {
+      requestMode: true,
+      hideCredentials: true,
+      hideCredentialsOptions: {
+        body: ['username', 'password']
+      }
+    }
   },
 });
