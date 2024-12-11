@@ -36,6 +36,10 @@ Cypress.Commands.add('login', (username, password) => {
     loginPage.fillUsername().type(username);
     loginPage.fillPassword().type(password);
     loginPage.submit();
+    cy.wait('@authRequest').then((response) =>{
+      expect(response.statusCode).to.eq(200)
+      expect(response.body.token).to.exist
+    })
     loginPage.sucess().contains('Dashboard');
   });
 
@@ -88,8 +92,6 @@ Cypress.Commands.add('new_customer', (name,email,company,salary,city,state,adres
 
   newCustomer.submit().click({force: true});
 
-  
-
 })
 Cypress.Commands.add('user_Success', (msg) => {
   // //When
@@ -101,4 +103,11 @@ Cypress.Commands.add('customer_Success', (msg) => {
   // //When
   //newUser.sucessMsg().should('be.visible');
   newCustomer.sucessMsg().should(msg);
+})
+
+Cypress.Commands.add('list_customers', () =>{
+
+  setAuthCookies();
+  cy.visit(urls.customer_list, { onBeforeLoad(win) {setAuthSessionStorage(win)}})
+  newCustomer.sucessMsg().should('be.visible');
 })
